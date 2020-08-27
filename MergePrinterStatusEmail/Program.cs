@@ -14,7 +14,7 @@ class Program
     {
         //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
         var a = new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus");
-       // 
+        // 
         //\\
         var Printer2 = new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm");
         //   System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm"));
@@ -132,7 +132,7 @@ class Program
                 oMail.Subject = "Printer Status";
                 // Set email body
 
-                oMail.TextBody = ("Black:" + Boja1 + "\nCyan:" + Boja2 + "\nMagenta:" + Boja3 + "\nYellow: " + Boja4 + "\nHodnik-skali:" + printer2 + "\nSmetkovotstvo:" + printer3);
+                oMail.TextBody = ("-1.  HP Color LaserJet CP1515n \nAdministracija:\n" + "-Black:" + Boja1 + "\n-Cyan:" + Boja2 + "\n-Magenta:" + Boja3 + "\n-Yellow: " + Boja4 + "\n---\n-2.    Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + "\n---\n3.  Kyocera M2040dn \nSmetkovotstvo: " + printer3);
 
                 // Gmail SMTP server address
                 SmtpServer oServer = new SmtpServer("smtp.gmail.com");
@@ -140,17 +140,15 @@ class Program
                 // For example: your email is "gmailid@gmail.com", then the user should be the same
 
                 Console.WriteLine("email:");
-                string email = Console.ReadLine();
-                oServer.User = email;
+                //string email = Console.ReadLine();
+               // oServer.User = email;
+                oServer.User = "aleksandarp.work@gmail.com";
 
-
-                //  oServer.User = "your send email";
                 Console.WriteLine("password:");
 
-                string password = Console.ReadLine();
-                oServer.Password = password;
-
-                //oServer.Password = "email password";
+               // string password = Console.ReadLine();
+                //oServer.Password = password;
+                oServer.Password = "Prilep123";
 
                 // Set 587 port, if you want to use 25 port, please change 587 5o 25
                 oServer.Port = 587;
@@ -177,15 +175,8 @@ class Program
 
 
 
-
-
-
-
-
-
-
     }
-    
+
 }
 
 
