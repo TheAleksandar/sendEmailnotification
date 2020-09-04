@@ -7,13 +7,26 @@ using System.Threading.Tasks;
 using EASendMail; //add EASendMail namespace
 
 
-
 class Program
 {
     static void Main(string[] args)
     {
-        //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
-        var a = new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus");
+        //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://A.156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
+        var a = "a";
+
+        try
+        {
+            a = new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus");
+        }
+        catch
+        {
+            a = "WIDTH:13% \n MARGIN BACKGROUND COLOR #000000" +
+                "WIDTH:13% \n MARGIN BACKGROUND COLOR #00FFFF" +
+                "WIDTH:13% \n MARGIN BACKGROUND COLOR #FF00FF" +
+                "WIDTH:13% \n MARGIN BACKGROUND COLOR #FFFF00";
+
+        }
+
         // 
         //\\
         var Printer2 = new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm");
@@ -21,7 +34,6 @@ class Program
 
         var Printer3 = new System.Net.WebClient().DownloadString("http://156.69.0.182/js/jssrc/model/startwlm/Hme_Toner.model.htm");
         //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.182/js/jssrc/model/startwlm/Hme_Toner.model.htm"));
-
 
         // Step 1: create new Regex.
 
@@ -31,7 +43,7 @@ class Program
         Regex regex3 = new Regex(@"WIDTH:(\d+)%.+(\n|\r|\r\n).+MARGIN.+BACKGROUND.+COLOR.+#FF00FF");
         Regex regex4 = new Regex(@"WIDTH:(\d+)%.+(\n|\r|\r\n).+MARGIN.+BACKGROUND.+COLOR.+#FFFF00");
         //      \\printer1
-        //nova
+       
 
         //printer 2 {
         Regex PrinterB1 = new Regex(@"Renaming\[0\]\s+=\s+(\d{1,3})");
@@ -39,10 +51,6 @@ class Program
 
         //printer 3{
         Regex PrinterC = new Regex(@"_pp.Renaming.push.+parseInt.+'(\d+)");
-
-
-
-        //do tuka sum dojden treba da napravam IF(da javi poraka za <20) 
 
 
 
@@ -80,7 +88,9 @@ class Program
             int x3 = Int32.Parse(Boja3.Value);
             int x4 = Int32.Parse(Boja4.Value);
 
-            Console.WriteLine("Black: " + Boja1 + "%");
+            DateTime dateTime = DateTime.Now;
+           
+            Console.WriteLine("Black: " + Boja1 + "% ");
             Console.WriteLine("Cyan: " + Boja2 + "%");
             Console.WriteLine("Magenta: " + Boja3 + "%");
             Console.WriteLine("Yellow: " + Boja4 + "%");
@@ -132,7 +142,7 @@ class Program
                 oMail.Subject = "Printer Status";
                 // Set email body
 
-                oMail.TextBody = ("-1.  HP Color LaserJet CP1515n \nAdministracija:\n" + "-Black:" + Boja1 + "\n-Cyan:" + Boja2 + "\n-Magenta:" + Boja3 + "\n-Yellow: " + Boja4 + "\n---\n-2.    Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + "\n---\n3.  Kyocera M2040dn \nSmetkovotstvo: " + printer3);
+                oMail.TextBody = ("Printer's Status"+ dateTime + "\n-1.  HP Color LaserJet CP1515n \nAdministracija:\n" + "-Black:" + Boja1 + "%\n-Cyan:" + Boja2 + "%\n-Magenta:" + Boja3 + "%\n-Yellow:" + Boja4 + "%\n***\n-2.  Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + "%\n***\n-3.  Kyocera M2040dn \nSmetkovotstvo:" + printer3+"%");
 
                 // Gmail SMTP server address
                 SmtpServer oServer = new SmtpServer("smtp.gmail.com");
