@@ -13,6 +13,8 @@ class Program
     {
         //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://A.156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
         var a = "a";
+        var Printer2 = "a";
+        var Printer3 = "a";
 
         try
         {
@@ -24,18 +26,32 @@ class Program
                 "WIDTH:13% \n MARGIN BACKGROUND COLOR #00FFFF" +
                 "WIDTH:13% \n MARGIN BACKGROUND COLOR #FF00FF" +
                 "WIDTH:13% \n MARGIN BACKGROUND COLOR #FFFF00";
-
         }
 
-        // 
-        //\\
-        var Printer2 = new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm");
-        //   System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm"));
+        try
+        {
+            Printer2 = new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm");
+            //   System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.174/startwlm/Hme_Toner.htm"));
 
-        var Printer3 = new System.Net.WebClient().DownloadString("http://156.69.0.182/js/jssrc/model/startwlm/Hme_Toner.model.htm");
-        //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.182/js/jssrc/model/startwlm/Hme_Toner.model.htm"));
+        }
+        catch (Exception)
+        {
 
-        // Step 1: create new Regex.
+            throw;
+        }
+
+        try
+        {
+             Printer3 = new System.Net.WebClient().DownloadString("http://156.69.0.182/js/jssrc/model/startwlm/Hme_Toner.model.htm");
+
+            //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.182/js/jssrc/model/startwlm/Hme_Toner.model.htm"));
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+       // Step 1: create new Regex.
 
         //printer 1
         Regex regex = new Regex(@"WIDTH:(\d+)%.+(\n|\r|\r\n).+MARGIN.+BACKGROUND.+COLOR.+#000000");
@@ -60,7 +76,7 @@ class Program
         Match match3 = regex3.Match(a);
         Match match4 = regex4.Match(a);
 
-        //za vtor printer
+        //printer2
         Match zavtorprinter = PrinterB1.Match(Printer2);
 
         //Printer3
@@ -78,15 +94,15 @@ class Program
             Group printer2 = zavtorprinter.Groups[1];
             //
             Group printer3 = print3.Groups[1];
-
-
-
+            
             //pretvorajne
 
             int x1 = Int32.Parse(Boja1.Value);
             int x2 = Int32.Parse(Boja2.Value);
             int x3 = Int32.Parse(Boja3.Value);
             int x4 = Int32.Parse(Boja4.Value);
+            int x5 = Int32.Parse(printer2.Value);
+            int x6 = Int32.Parse(printer3.Value);
 
             DateTime dateTime = DateTime.Now;
            
@@ -105,7 +121,7 @@ class Program
             int lowcolor = 20;
 
 
-            Console.WriteLine("Low color show here");
+            Console.WriteLine("Low color show here->");
 
 
             if (x1 <= lowcolor)
@@ -128,6 +144,15 @@ class Program
             {
                 Console.WriteLine("Yellow " + x4);
             }
+            if (x5 <= lowcolor)
+            {
+                Console.WriteLine("printer2 " + x4);
+            }
+            if (x6 <= lowcolor)
+            {
+                Console.WriteLine("printer3 " + x4);
+            }
+            Console.WriteLine("END-Low color");
 
             try
             {
@@ -179,12 +204,8 @@ class Program
                 Console.WriteLine("failed to send email with the following error:");
                 Console.WriteLine(ep.Message);
             }
+            Console.ReadLine();
         }
-
-
-
-
-
     }
 
 }
