@@ -117,7 +117,7 @@ class Program
             Console.WriteLine("tret printer\nKyocera M2040dn - Smetkovotstvo: " + printer3.Value);
 
 
-            int lowcolor = 20;
+            int lowcolor = 3;
             int redalert = 0;
 
             Console.WriteLine("Low color show here->");
