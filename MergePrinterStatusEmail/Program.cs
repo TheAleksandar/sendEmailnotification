@@ -11,7 +11,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://A.156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
+        //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
         var a = "a";
         var Printer2 = "a";
         var Printer3 = "a";
@@ -22,10 +22,10 @@ class Program
         }
         catch
         {
-            a = "WIDTH:13% \n MARGIN BACKGROUND COLOR #000000" +
-                "WIDTH:13% \n MARGIN BACKGROUND COLOR #00FFFF" +
-                "WIDTH:13% \n MARGIN BACKGROUND COLOR #FF00FF" +
-                "WIDTH:13% \n MARGIN BACKGROUND COLOR #FFFF00";
+            a = "WIDTH:404% \n MARGIN BACKGROUND COLOR #000000" +
+                "WIDTH:404% \n MARGIN BACKGROUND COLOR #00FFFF" +
+                "WIDTH:404% \n MARGIN BACKGROUND COLOR #FF00FF" +
+                "WIDTH:404% \n MARGIN BACKGROUND COLOR #FFFF00";
         }
 
         try
@@ -36,8 +36,7 @@ class Program
         }
         catch (Exception)
         {
-
-            throw;
+            Printer2 = "Renaming[0] = 404%";
         }
 
         try
@@ -49,7 +48,7 @@ class Program
         catch (Exception)
         {
 
-            throw;
+            Printer3= "_pp.Renaming.push(parseInt('404";
         }
        // Step 1: create new Regex.
 
@@ -67,7 +66,7 @@ class Program
 
         //printer 3{
         Regex PrinterC = new Regex(@"_pp.Renaming.push.+parseInt.+'(\d+)");
-
+        
 
 
         // Step 2: call Match on Regex instance.
