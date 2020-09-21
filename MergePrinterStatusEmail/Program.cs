@@ -93,7 +93,7 @@ class Program
             Group printer2 = zavtorprinter.Groups[1];
             //
             Group printer3 = print3.Groups[1];
-            
+
             //pretvorajne
 
             int x1 = Int32.Parse(Boja1.Value);
@@ -104,7 +104,7 @@ class Program
             int x6 = Int32.Parse(printer3.Value);
 
             DateTime dateTime = DateTime.Now;
-           
+
             Console.WriteLine("Black: " + Boja1 + "% ");
             Console.WriteLine("Cyan: " + Boja2 + "%");
             Console.WriteLine("Magenta: " + Boja3 + "%");
@@ -118,7 +118,7 @@ class Program
 
 
             int lowcolor = 20;
-
+            int redalert = 0;
 
             Console.WriteLine("Low color show here->");
 
@@ -126,84 +126,88 @@ class Program
             if (x1 <= lowcolor)
             {
                 Console.WriteLine("Black " + x1);
+                redalert = 1;
             }
 
             if (x2 <= lowcolor)
             {
-
                 Console.WriteLine("Cyan " + x2);
+                redalert = 1;
             }
 
             if (x3 <= lowcolor)
             {
                 Console.WriteLine("Magenta " + x3);
+                redalert = 1;
             }
 
             if (x4 <= lowcolor)
             {
                 Console.WriteLine("Yellow " + x4);
+                redalert = 1;
             }
             if (x5 <= lowcolor)
             {
                 Console.WriteLine("printer2 " + x4);
+                redalert = 1;
             }
             if (x6 <= lowcolor)
             {
                 Console.WriteLine("printer3 " + x4);
+                redalert = 1;
             }
             Console.WriteLine("END-Low color");
 
-            try
+            if (redalert == 1 || x1==404 || x2 == 404 || x3 == 404 || x4 == 404 || x5==404 || x6==404)
             {
-                SmtpMail oMail = new SmtpMail("TryIt");
 
-                // Your gmail email address
-                oMail.From = "aleksandarp.work@gmail.com";
-                // Set recipient email address
-                oMail.To = "aleksandarp@mail.mikrosam.com";
+                try
+                {
+                    SmtpMail oMail = new SmtpMail("TryIt");
 
-                // Set email subject
-                oMail.Subject = "Printer Status";
-                // Set email body
+                    // Your gmail email address
+                    oMail.From = "aleksandarp.work@gmail.com";
+                    // Set recipient email address
+                    oMail.To = "aleksandarp@mail.mikrosam.com";
 
-                oMail.TextBody = ("Printer's Status"+ dateTime + "\n-1.  HP Color LaserJet CP1515n \nAdministracija:\n" + "-Black:" + Boja1 + "%\n-Cyan:" + Boja2 + "%\n-Magenta:" + Boja3 + "%\n-Yellow:" + Boja4 + "%\n***\n-2.  Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + "%\n***\n-3.  Kyocera M2040dn \nSmetkovotstvo:" + printer3+"%");
+                    // Set email subject
+                    oMail.Subject = "Printer Status";
+                    // Set email body
 
-                // Gmail SMTP server address
-                SmtpServer oServer = new SmtpServer("smtp.gmail.com");
-                // Gmail user authentication
-                // For example: your email is "gmailid@gmail.com", then the user should be the same
+                    oMail.TextBody = ("Printer's Status" + dateTime + "\n-1.  HP Color LaserJet CP1515n \nAdministracija:\n" + "-Black:" + Boja1 + "%\n-Cyan:" + Boja2 + "%\n-Magenta:" + Boja3 + "%\n-Yellow:" + Boja4 + "%\n***\n-2.  Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + "%\n***\n-3.  Kyocera M2040dn \nSmetkovotstvo:" + printer3 + "%");
 
-                Console.WriteLine("email:");
-                //string email = Console.ReadLine();
-               // oServer.User = email;
-                oServer.User = "aleksandarp.work@gmail.com";
+                    // Gmail SMTP server address
+                    SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+                    // Gmail user authentication
+                    // For example: your email is "gmailid@gmail.com", then the user should be the same
 
-                Console.WriteLine("password:");
+                    Console.WriteLine("email:");
 
-               // string password = Console.ReadLine();
-                //oServer.Password = password;
-                oServer.Password = "Prilep123";
+                    oServer.User = "aleksandarp.work@gmail.com";
+                    oServer.Password = "Prilep123";
 
-                // Set 587 port, if you want to use 25 port, please change 587 5o 25
-                oServer.Port = 587;
-                //587
+                    // Set 587 port, if you want to use 25 port, please change 587 5o 25
+                    oServer.Port = 587;
+                    //587
 
-                // detect SSL/TLS automatically
-                oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+                    // detect SSL/TLS automatically
+                    oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
 
-                Console.WriteLine("start to send email over SSL ...");
+                    Console.WriteLine("start to send email over SSL ...");
 
-                SmtpClient oSmtp = new SmtpClient();
-                oSmtp.SendMail(oServer, oMail);
+                    SmtpClient oSmtp = new SmtpClient();
+                    oSmtp.SendMail(oServer, oMail);
 
-                Console.WriteLine("email was sent successfully!");
+                    Console.WriteLine("email was sent successfully!");
+                }
+                catch (Exception ep)
+                {
+                    Console.WriteLine("failed to send email with the following error:");
+                    Console.WriteLine(ep.Message);
+                }
+
             }
-            catch (Exception ep)
-            {
-                Console.WriteLine("failed to send email with the following error:");
-                Console.WriteLine(ep.Message);
-            }
-            Console.ReadLine();
+          //  Console.ReadLine();
         }
     }
 
