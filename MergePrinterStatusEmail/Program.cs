@@ -249,6 +249,7 @@ class Program
                 {
                     Console.WriteLine("failed to send email with the following error:");
                     Console.WriteLine(ep.Message);
+
                 }
 
             }
