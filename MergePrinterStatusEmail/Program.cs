@@ -1,10 +1,10 @@
-﻿using System;
+﻿using EASendMail; //add EASendMail namespace
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using EASendMail; //add EASendMail namespace
 
 
 class Program
@@ -12,9 +12,10 @@ class Program
     static void Main(string[] args)
     {
         //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.178/info_deviceStatus.html?tab=Status&menu=DevStatus"));
-        var a = "a";
-        var Printer2 = "a";
-        var Printer3 = "a";
+        var a = "a"; //printer administracija
+        var Printer2 = "a"; //Hodnik skali
+        var Printer3 = "a"; //smetkovotstvo 
+        var Printer4 = "a"; //
 
         try
         {
@@ -50,6 +51,17 @@ class Program
 
             Printer3= "_pp.Renaming.push(parseInt('404";
         }
+       
+        try
+        {
+            Printer4 = new System.Net.WebClient().DownloadString("http://156.69.0.171/Information/supplies_status.htm");
+        }
+        catch
+        {
+            Printer4 = "var BlackTonerPer = 404";
+        }
+
+
        // Step 1: create new Regex.
 
         //printer 1
@@ -66,7 +78,9 @@ class Program
 
         //printer 3{
         Regex PrinterC = new Regex(@"_pp.Renaming.push.+parseInt.+'(\d+)");
-        
+        //printer4{
+        Regex PrinterD = new Regex(@"var.+BlackTonerPer.+= (\d\d+)");
+
 
 
         // Step 2: call Match on Regex instance.
@@ -80,6 +94,8 @@ class Program
 
         //Printer3
         Match print3 = PrinterC.Match(Printer3);
+        //Printer4
+        Match print4 = PrinterD.Match(Printer4);
 
 
         // Step 3: test for Success.
@@ -93,6 +109,9 @@ class Program
             Group printer2 = zavtorprinter.Groups[1];
             //
             Group printer3 = print3.Groups[1];
+            //
+            Group printer4 = print4.Groups[1];
+
 
             //pretvorajne
 
@@ -102,6 +121,9 @@ class Program
             int x4 = Int32.Parse(Boja4.Value);
             int x5 = Int32.Parse(printer2.Value);
             int x6 = Int32.Parse(printer3.Value);
+            int x7 = Int32.Parse(printer4.Value);
+
+
 
             DateTime dateTime = DateTime.Now;
 
@@ -112,12 +134,15 @@ class Program
 
             Console.WriteLine("end");
 
-            Console.WriteLine("vtor printer\nKyocera FS-6525MFP - Hodnik Skali: " + printer2.Value);
+            Console.WriteLine("vtor printer\nKyocera FS-6525MFP - Hodnik Skali: " + printer2.Value + "%");
+            Console.WriteLine("end");
 
-            Console.WriteLine("tret printer\nKyocera M2040dn - Smetkovotstvo: " + printer3.Value);
+            Console.WriteLine("tret printer\nKyocera M2040dn - Smetkovotstvo: " + printer3.Value + "%");
+
+            Console.WriteLine("Cetvrt printer\n SCX-4x25 Series  - iacr kanc: " + x7+"%");
 
 
-            int lowcolor = 3;
+            int lowcolor = 4;
             int redalert = 0;
 
             Console.WriteLine("Low color show here->");
@@ -126,7 +151,7 @@ class Program
             if (x1 <= lowcolor)
             {
                 Console.WriteLine("Black " + x1);
-                redalert = 1;
+                redalert = redalert + 1;
             }
 
             if (x2 <= lowcolor)
@@ -148,17 +173,28 @@ class Program
             }
             if (x5 <= lowcolor)
             {
-                Console.WriteLine("printer2 " + x4);
+                Console.WriteLine("printer2 " + x5);
                 redalert = 1;
             }
             if (x6 <= lowcolor)
             {
-                Console.WriteLine("printer3 " + x4);
+                Console.WriteLine("printer3 " + x6);
                 redalert = 1;
             }
+            
+            if(x7<=lowcolor)
+            {
+                Console.WriteLine("printer4 " + x7);
+            }
+
+
+
             Console.WriteLine("END-Low color");
 
-            if (redalert == 1 || x1==404 || x2 == 404 || x3 == 404 || x4 == 404 || x5==404 || x6==404)
+
+
+           
+         //   if (redalert >=1 || x1==404 || x2 == 404 || x3 == 404 || x4 == 404 || x5==404 || x6==404 || x7 == 404)
             {
 
                 try
@@ -174,8 +210,17 @@ class Program
                     oMail.Subject = "Printer Status";
                     // Set email body
 
-                    oMail.TextBody = ("Printer's Status" + dateTime + "\n-1.  HP Color LaserJet CP1515n \nAdministracija:\n" + "-Black:" + Boja1 + "%\n-Cyan:" + Boja2 + "%\n-Magenta:" + Boja3 + "%\n-Yellow:" + Boja4 + "%\n***\n-2.  Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + "%\n***\n-3.  Kyocera M2040dn \nSmetkovotstvo:" + printer3 + "%");
+                    oMail.TextBody = ("Printer's Status Alert!!!" + dateTime +
+                        "\n-1.  HP Color LaserJet CP1515n \nAdministracija:\n" +
+                        "-Black:" + Boja1 + 
+                        "%\n-Cyan:" + Boja2 + 
+                        "%\n-Magenta:" + Boja3 + 
+                        "%\n-Yellow:" + Boja4 +
+                        "%\n***\n-2.  Kyocera FS-6525MFP \nHodnik - skali:" + printer2 + 
+                        "%\n***\n-3.  Kyocera M2040dn \nSmetkovotstvo:" + printer3 +
+                        "%\n***\n-4. Samsung SCX-4x25 Series\n IACR kanc: " + printer4+"%");
 
+                   
                     // Gmail SMTP server address
                     SmtpServer oServer = new SmtpServer("smtp.gmail.com");
                     // Gmail user authentication
@@ -207,7 +252,7 @@ class Program
                 }
 
             }
-          //  Console.ReadLine();
+          Console.ReadLine();
         }
     }
 
