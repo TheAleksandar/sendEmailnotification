@@ -1,14 +1,16 @@
 ﻿using EASendMail; //add EASendMail namespace
 using System;
+using System.Net;
 using System.Text.RegularExpressions;
+using System.Net.Security;
 
 
 class Program
 {
     static void Main(string[] args)
     {
-
-      System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.177:8000/"));
+       
+        System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.177:8000/rps/"));
 
 
         var a = "a"; //printer administracija (178)
@@ -18,6 +20,7 @@ class Program
         var Printer5 = "a"; //HP LaserJet MFP M130fw - fani kanc (172)
         var Printer6 = "a"; //HP LaserJet 1320 - hala2 elektricari (176)
         var Printer7 = "a"; //IARC kanc (179)
+
 
 
 
@@ -81,7 +84,7 @@ class Program
         //printer 6 - hala2 elektricari
         try
         {
-            Printer6=new System.Net.WebClient().DownloadString("http://A156.69.0.176/hp/device/info_deviceStatus.html");
+            Printer6=new System.Net.WebClient().DownloadString("http://a.156.69.0.176/hp/device/info_deviceStatus.html");
         }
         catch
         {
@@ -174,15 +177,13 @@ class Program
             //
             Group printer5 = print5.Groups[1];
             //
-            Group printer6 = print3.Groups[1];
+            Group printer6 = print6.Groups[1];
             //
             Group printer71 = print71.Groups[1];
             Group printer72 = print72.Groups[1];
             Group printer73 = print73.Groups[1];
             Group printer74 = print74.Groups[1];
-
-
-
+            
             //pretvorajne
         
                 int x1 = Int32.Parse(Boja1.Value);
@@ -199,20 +200,14 @@ class Program
                 int x12 = Int32.Parse(printer73.Value);
                 int x13 = Int32.Parse(printer74.Value);
             
-                
-
-
-
-
-
+             
             DateTime dateTime = DateTime.Now;
             //
             Console.WriteLine("Black: " + Boja1 + "% ");
             Console.WriteLine("Cyan: " + Boja2 + "%");
             Console.WriteLine("Magenta: " + Boja3 + "%");
             Console.WriteLine("Yellow: " + Boja4 + "%");
-
-            
+                        
             //
             Console.WriteLine("vtor printer\nKyocera FS-6525MFP - Hodnik Skali: " + printer2.Value + "%");
             
@@ -361,6 +356,7 @@ class Program
         }
     }
 
+   
 }
 
 
