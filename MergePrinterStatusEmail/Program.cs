@@ -8,7 +8,7 @@ class Program
     static void Main(string[] args)
     {
 
-      //  System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.179/hp/device/info_suppliesStatus.html?tab=Status&amp;menu=SupplyStatus"));
+      System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.177:8000/"));
 
 
         var a = "a"; //printer administracija (178)
