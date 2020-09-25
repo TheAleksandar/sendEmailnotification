@@ -136,8 +136,7 @@ class Program
         Regex PrinterG3 = new Regex(@"<td style=.WIDTH:(\d+)%.+BACKGROUND-COLOR:.+#FF00FF");
         Regex PrinterG4 = new Regex(@"<td style=.WIDTH:(\d+)%.+BACKGROUND-COLOR:.+#FFFF00");
 
-
-
+        
         // Step 2: call Match on Regex instance.
         Match match = regex.Match(a);
         Match match2 = regex2.Match(a);
@@ -162,13 +161,12 @@ class Program
         Match print74 = PrinterG4.Match(Printer7);
         //
 
-
-
-
+        
 
         // Step 3: test for Success.
         if (match.Success)
         {
+            //grupi za printerite
             Group Boja1 = match.Groups[1];
             Group Boja2 = match2.Groups[1];
             Group Boja3 = match3.Groups[1];
@@ -192,45 +190,52 @@ class Program
 
 
             //pretvorajne
-
-            int x1 = Int32.Parse(Boja1.Value);
-            int x2 = Int32.Parse(Boja2.Value);
-            int x3 = Int32.Parse(Boja3.Value);
-            int x4 = Int32.Parse(Boja4.Value);
-            int x5 = Int32.Parse(printer2.Value);
-            int x6 = Int32.Parse(printer3.Value);
-            int x7 = Int32.Parse(printer4.Value);
-            int x8 = Int32.Parse(printer5.Value);
-            int x9 = Int32.Parse(printer6.Value);
-            int x10= Int32.Parse(printer71.Value);
-            int x11= Int32.Parse(printer72.Value);
-            int x12= Int32.Parse(printer73.Value);
-            int x13= Int32.Parse(printer74.Value);
-
+            {
+                int x1 = Int32.Parse(Boja1.Value);
+                int x2 = Int32.Parse(Boja2.Value);
+                int x3 = Int32.Parse(Boja3.Value);
+                int x4 = Int32.Parse(Boja4.Value);
+                int x5 = Int32.Parse(printer2.Value);
+                int x6 = Int32.Parse(printer3.Value);
+                int x7 = Int32.Parse(printer4.Value);
+                int x8 = Int32.Parse(printer5.Value);
+                int x9 = Int32.Parse(printer6.Value);
+                int x10 = Int32.Parse(printer71.Value);
+                int x11 = Int32.Parse(printer72.Value);
+                int x12 = Int32.Parse(printer73.Value);
+                int x13 = Int32.Parse(printer74.Value);
+            }
+                
 
 
 
 
 
             DateTime dateTime = DateTime.Now;
-
+            //
             Console.WriteLine("Black: " + Boja1 + "% ");
             Console.WriteLine("Cyan: " + Boja2 + "%");
             Console.WriteLine("Magenta: " + Boja3 + "%");
             Console.WriteLine("Yellow: " + Boja4 + "%");
 
-            Console.WriteLine("end");
-
+            
+            //
             Console.WriteLine("vtor printer\nKyocera FS-6525MFP - Hodnik Skali: " + printer2.Value + "%");
-            Console.WriteLine("end");
-
+            
+            //
             Console.WriteLine("tret printer\nKyocera M2040dn - Smetkovotstvo: " + printer3.Value + "%");
-
+            //
             Console.WriteLine("Cetvrt printer\n SCX-4x25 Series  - iacr kanc: " + x7 + "%");
-
+            //
             Console.WriteLine("Peti printer\n  " + x8 + "%");
+            //
+            Console.WriteLine("Sesti " + x9 + "%");
+            ///
 
-            Console.WriteLine("sesti" + x9 + "%");
+            Console.WriteLine("sedmiB " + x10 + "%");
+            Console.WriteLine("sedmiC " + x11 + "%");
+            Console.WriteLine("sedmiM " + x12 + "%");
+            Console.WriteLine("sedmiY " + x13 + "%");
 
             int lowcolor = 4;
             int redalert = 0;
