@@ -13,7 +13,7 @@ class Program
     static void Main(string[] args)
     {
 
-        System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.177:8000/"));
+        System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.179/hp/device/info_suppliesStatus.html?tab=Status&amp;menu=SupplyStatus"));
 
 
         var a = "a"; //printer administracija
@@ -93,6 +93,20 @@ class Program
 
         }
 
+        //printer 7 -IACR kanc
+        try
+        {
+            Printer7 = new System.Net.WebClient().DownloadString("http://156.69.0.179/hp/device/info_suppliesStatus.html?tab=Status&amp;menu=SupplyStatus");
+        }
+        catch
+        {
+            a = "<td style= WIDTH:404% BACKGROUND-COLOR: #000000" +
+               "<td style= WIDTH:404% BACKGROUND-COLOR: #00FFFF" +
+               "<td style= WIDTH:404% BACKGROUND-COLOR: #FF00FF" +
+               "<td style= WIDTH:404% BACKGROUND-COLOR: #FFFF00";
+
+        }
+
        // Step 1: create new Regex.
 
         //printer 1
@@ -115,7 +129,15 @@ class Program
         //
         //printer 6
         Regex PrinterF = new Regex(@"<table.+border.+width=(\d+)%.+bgcolor=.#000000");
-        
+        //printer7
+
+        Regex PrinterG1 = new Regex(@"<td style=.WIDTH:(\d+)%.+BACKGROUND-COLOR:.+#000000");
+        Regex PrinterG2 = new Regex(@"<td style=.WIDTH:(\d+)%.+BACKGROUND-COLOR:.+#00FFFF");
+        Regex PrinterG3 = new Regex(@"<td style=.WIDTH:(\d+)%.+BACKGROUND-COLOR:.+#FF00FF");
+        Regex PrinterG4 = new Regex(@"<td style=.WIDTH:(\d+)%.+BACKGROUND-COLOR:.+#FFFF00");
+
+
+
         // Step 2: call Match on Regex instance.
         Match match = regex.Match(a);
         Match match2 = regex2.Match(a);
@@ -133,6 +155,12 @@ class Program
         Match print5 = PrinterE.Match(Printer5);
         //Printer 6
         Match print6 = PrinterF.Match(Printer6);
+        //Printer7
+        Match print71 = PrinterG1.Match(Printer7);
+        Match print72 = PrinterG2.Match(Printer7);
+        Match print73 = PrinterG3.Match(Printer7);
+        Match print74 = PrinterG4.Match(Printer7);
+        //
 
 
 
@@ -155,6 +183,12 @@ class Program
             Group printer5 = print5.Groups[1];
             //
             Group printer6 = print3.Groups[1];
+            //
+            Group printer71 = print71.Groups[1];
+            Group printer72 = print72.Groups[1];
+            Group printer73 = print73.Groups[1];
+            Group printer74 = print74.Groups[1];
+
 
 
             //pretvorajne
@@ -168,6 +202,11 @@ class Program
             int x7 = Int32.Parse(printer4.Value);
             int x8 = Int32.Parse(printer5.Value);
             int x9 = Int32.Parse(printer6.Value);
+            int x10= Int32.Parse(printer71.Value);
+            int x11= Int32.Parse(printer72.Value);
+            int x12= Int32.Parse(printer73.Value);
+            int x13= Int32.Parse(printer74.Value);
+
 
 
 
