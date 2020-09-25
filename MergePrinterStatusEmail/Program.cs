@@ -1,11 +1,6 @@
 ﻿using EASendMail; //add EASendMail namespace
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 
 class Program
@@ -13,16 +8,16 @@ class Program
     static void Main(string[] args)
     {
 
-        System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.179/hp/device/info_suppliesStatus.html?tab=Status&amp;menu=SupplyStatus"));
+      //  System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.179/hp/device/info_suppliesStatus.html?tab=Status&amp;menu=SupplyStatus"));
 
 
-        var a = "a"; //printer administracija
-        var Printer2 = "a"; //Hodnik skali
-        var Printer3 = "a"; //smetkovotstvo 
-        var Printer4 = "a"; //IARC kanc
-        var Printer5 = "a"; //HP LaserJet MFP M130fw - fani kanc
-        var Printer6 = "a"; //HP LaserJet 1320 - hala2 elektricari
-        var Printer7 = "a"; //Canon iR-ADV C3525  -  proektbiro1
+        var a = "a"; //printer administracija (178)
+        var Printer2 = "a"; //Hodnik skali 174
+        var Printer3 = "a"; //smetkovotstvo (182)
+        var Printer4 = "a"; //IARC kanc (171)
+        var Printer5 = "a"; //HP LaserJet MFP M130fw - fani kanc (172)
+        var Printer6 = "a"; //HP LaserJet 1320 - hala2 elektricari (176)
+        var Printer7 = "a"; //IARC kanc (179)
 
 
 
@@ -86,12 +81,12 @@ class Program
         //printer 6 - hala2 elektricari
         try
         {
-            Printer6=new System.Net.WebClient().DownloadString("http://156.69.0.176/hp/device/info_deviceStatus.html");
+            Printer6=new System.Net.WebClient().DownloadString("http://A156.69.0.176/hp/device/info_deviceStatus.html");
         }
         catch
         {
-
-        }
+            Printer6 = "<table border width=404% bgcolor= #000000";
+         }
 
         //printer 7 -IACR kanc
         try
@@ -100,11 +95,10 @@ class Program
         }
         catch
         {
-            a = "<td style= WIDTH:404% BACKGROUND-COLOR: #000000" +
-               "<td style= WIDTH:404% BACKGROUND-COLOR: #00FFFF" +
-               "<td style= WIDTH:404% BACKGROUND-COLOR: #FF00FF" +
-               "<td style= WIDTH:404% BACKGROUND-COLOR: #FFFF00";
-
+            Printer7 = "<td style= WIDTH:404% BACKGROUND-COLOR:  #000000" +
+               "<td style= WIDTH:404% BACKGROUND-COLOR:  #00FFFF" +
+               "<td style= WIDTH:404% BACKGROUND-COLOR:  #FF00FF" +
+               "<td style= WIDTH:404% BACKGROUND-COLOR:  #FFFF00";
         }
 
        // Step 1: create new Regex.
@@ -190,7 +184,7 @@ class Program
 
 
             //pretvorajne
-            {
+        
                 int x1 = Int32.Parse(Boja1.Value);
                 int x2 = Int32.Parse(Boja2.Value);
                 int x3 = Int32.Parse(Boja3.Value);
@@ -204,7 +198,7 @@ class Program
                 int x11 = Int32.Parse(printer72.Value);
                 int x12 = Int32.Parse(printer73.Value);
                 int x13 = Int32.Parse(printer74.Value);
-            }
+            
                 
 
 
@@ -362,6 +356,7 @@ class Program
                 }
 
             }
+
           Console.ReadLine();
         }
     }
