@@ -20,9 +20,7 @@ class Program
         var Printer6 = "a"; //HP LaserJet 1320 - hala2 elektricari (176)
         var Printer7 = "a"; //IARC kanc (179)
 
-
-
-
+       
         //printer 1 administracija
         try
         {
@@ -30,6 +28,8 @@ class Program
         }
         catch
         {
+
+
             a = "WIDTH:404% \n MARGIN BACKGROUND COLOR #000000" +
                 "WIDTH:404% \n MARGIN BACKGROUND COLOR #00FFFF" +
                 "WIDTH:404% \n MARGIN BACKGROUND COLOR #FF00FF" +
@@ -218,7 +218,15 @@ class Program
             Console.WriteLine("Peti printer\n  " + x8 + "%");
             //
             Console.WriteLine("Sesti " + x9 + "%");
-            ///
+
+            Console.WriteLine("Sesti " + x9 + "%");
+
+
+            Console.WriteLine("Sesti " + x9 + "%");
+            
+            //
+            //
+
 
             Console.WriteLine("sedmiB " + x10 + "%");
             Console.WriteLine("sedmiC " + x11 + "%");
@@ -313,8 +321,7 @@ class Program
                         "%\n***\n-2.  Kyocera FS-6525MFP \nHodnik - skali:" + printer2 +
                         "%\n***\n-3.  Kyocera M2040dn \nSmetkovotstvo:" + printer3 +
                         "%\n***\n-4. Samsung SCX-4x25 Series\n IACR kanc: " + printer4 +
-                        "%n***\n-5. HP LaserJet MFP M130fw - fani kanc" +
-                        "\n BLACK" + printer5 + "%" +
+                        "%n***\n-5. HP LaserJet MFP M130fw - fani kanc" +"\n BLACK" + printer5 + "%" +
                         "\n***\n-6. HP LaserJet 1320 - Elekrcari: " + printer6 + " % ");
 
                    
@@ -330,7 +337,7 @@ class Program
 
                     // Set 587 port, if you want to use 25 port, please change 587 5o 25
                     oServer.Port = 587;
-                    //587
+                  
 
                     // detect SSL/TLS automatically
                     oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
