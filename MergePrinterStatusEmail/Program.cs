@@ -218,7 +218,15 @@ class Program
             Console.WriteLine("Peti printer\n  " + x8 + "%");
             //
             Console.WriteLine("Sesti " + x9 + "%");
-            ///
+
+            Console.WriteLine("Sesti " + x9 + "%");
+
+
+            Console.WriteLine("Sesti " + x9 + "%");
+            
+            //
+            //
+
 
             Console.WriteLine("sedmiB " + x10 + "%");
             Console.WriteLine("sedmiC " + x11 + "%");
