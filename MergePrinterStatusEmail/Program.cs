@@ -9,7 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.177:8000/rps/"));
+      //System.Console.WriteLine(new System.Net.WebClient().DownloadString("http://156.69.0.177:8000/rps/"));
       
 
         var a = "a"; //printer administracija (178)
@@ -83,7 +83,7 @@ class Program
         //printer 6 - hala2 elektricari
         try
         {
-            Printer6=new System.Net.WebClient().DownloadString("http://a.156.69.0.176/hp/device/info_deviceStatus.html");
+            Printer6=new System.Net.WebClient().DownloadString("http://156.69.0.176/hp/device/info_deviceStatus.html");
         }
         catch
         {
